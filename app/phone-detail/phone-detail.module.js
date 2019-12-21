@@ -1,10 +1,8 @@
-'use strict';
-
 import phone from '../core/phone/phone.module';
 import phoneDetailComponent from './phone-detail.component';
 import { name as phoneDetailComponentName } from './phone-detail.component';
 
-var MODULE_NAME = 'phoneDetail';
+const MODULE_NAME = 'phoneDetail';
 
 angular.
   module(MODULE_NAME, [phone]).

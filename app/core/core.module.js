@@ -1,8 +1,6 @@
-'use strict';
-
 import phone from './phone/phone.module';
 
-var MODULE_NAME = 'core';
+const MODULE_NAME = 'core';
 
 angular.module(MODULE_NAME, [phone]);
 

@@ -1,5 +1,3 @@
-'use strict';
-
 import './app.animations.css';
 
 function phoneAnimationFactory() {
@@ -42,6 +40,6 @@ function phoneAnimationFactory() {
   }
 }
 
-export var className = '.phone';
+export const className = '.phone';
 
 export default phoneAnimationFactory;

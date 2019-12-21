@@ -1,5 +1,3 @@
-'use strict';
-
 Phone.$inject = ['$resource'];
 function Phone($resource) {
   return $resource('phones/:phoneId.json', {}, {
@@ -11,6 +9,6 @@ function Phone($resource) {
   });
 }
 
-export var name = 'Phone';
+export const name = 'Phone';
 
 export default Phone;

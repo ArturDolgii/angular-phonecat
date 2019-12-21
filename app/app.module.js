@@ -1,5 +1,3 @@
-'use strict';
-
 import './app.css';
 
 import angular from 'angular';

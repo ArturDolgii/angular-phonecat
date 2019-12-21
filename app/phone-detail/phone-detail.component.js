@@ -1,21 +1,29 @@
-'use strict';
-
 import template from './phone-detail.template.html';
 import * as PhoneService from '../core/phone/phone.service';
 
-PhoneDetailController.$inject = ['$routeParams', PhoneService.name];
-function PhoneDetailController($routeParams, Phone) {
-  var self = this;
-  self.phone = Phone.get({phoneId: $routeParams.phoneId}, function(phone) {
-    self.setImage(phone.images[0]);
-  });
+class PhoneDetailController {
+  constructor($routeParams, Phone) {
+    this.$routeParams = $routeParams;
+    this.Phone = Phone;
+  }
 
-  self.setImage = function setImage(imageUrl) {
-    self.mainImageUrl = imageUrl;
-  };
+  $onInit() {
+    this.phone = this.getPhone();
+  }
+
+  getPhone() {
+    return this.Phone.get({phoneId: this.$routeParams.phoneId}, (phone) => {
+      this.setImage(phone.images[0]);
+    });
+  }
+
+  setImage(imageUrl) {
+    this.mainImageUrl = imageUrl;
+  }
 }
+PhoneDetailController.$inject = ['$routeParams', PhoneService.name];
 
-export var name = 'phoneDetail';
+export const name = 'phoneDetail';
 
 export default {
   template,

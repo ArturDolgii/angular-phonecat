@@ -1,17 +1,21 @@
-'use strict';
-
 import './styles.css';
 
 import template from './phone-list.template.html';
 import * as PhoneService from "../core/phone/phone.service";
 
-PhoneListController.$inject = [PhoneService.name];
-function PhoneListController(Phone) {
-  this.phones = Phone.query();
-  this.orderProp = 'age';
-}
+class PhoneListController {
+  constructor(Phone) {
+    this.Phone  = Phone;
+  }
 
-export var name = 'phoneList';
+  $onInit() {
+    this.phones = this.Phone.query();
+    this.orderProp = 'age';
+  }
+}
+PhoneListController.$inject = [PhoneService.name];
+
+export const name = 'phoneList';
 
 export default {
   template,
