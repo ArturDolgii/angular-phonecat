@@ -1,6 +1,8 @@
+import angular from 'angular';
+
 import phone from './phone/phone.module';
 
-const MODULE_NAME = 'core';
+const MODULE_NAME: string = 'core';
 
 angular.module(MODULE_NAME, [phone]);
 

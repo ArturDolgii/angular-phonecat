@@ -1,8 +1,10 @@
+import angular from 'angular';
+
 import phone from '../core/phone/phone.module';
 import phoneDetailComponent from './phone-detail.component';
 import { name as phoneDetailComponentName } from './phone-detail.component';
 
-const MODULE_NAME = 'phoneDetail';
+const MODULE_NAME: string = 'phoneDetail';
 
 angular.
   module(MODULE_NAME, [phone]).

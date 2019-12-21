@@ -6,7 +6,7 @@ const CopyPlugin = require('copy-webpack-plugin');
 module.exports = {
     mode: 'development',
     entry: {
-        index: './app/app.module.js',
+        index: './app/app.module.ts',
     },
     devtool:  'source-map',
     output: {
@@ -15,18 +15,16 @@ module.exports = {
     },
     module: {
         rules: [
-            {
-                test: /\.js$/,
-                use: {
-                    loader: 'babel-loader',
-                    options: {
-                        presets: ['@babel/preset-env'],
-                    },
-                },
-            },
             { test: /\.html$/, use: 'raw-loader' },
+            {
+                test: /\.ts?$/,
+                use: 'ts-loader',
+            },
             { test: /\.css$/i, use: ['style-loader', 'css-loader'] }
         ]
+    },
+    resolve: {
+        extensions: ['.ts', '.js'],
     },
     optimization: {
         runtimeChunk: 'single',
