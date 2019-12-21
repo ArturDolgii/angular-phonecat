@@ -1,7 +1,13 @@
 'use strict';
 
-// Define the `phoneDetail` module
-angular.module('phoneDetail', [
-  'ngRoute',
-  'core.phone'
-]);
+import phone from '../core/phone/phone.module';
+import phoneDetailComponent from './phone-detail.component';
+import { name as phoneDetailComponentName } from './phone-detail.component';
+
+var MODULE_NAME = 'phoneDetail';
+
+angular.
+  module(MODULE_NAME, [phone]).
+  component(phoneDetailComponentName, phoneDetailComponent);
+
+export default MODULE_NAME;

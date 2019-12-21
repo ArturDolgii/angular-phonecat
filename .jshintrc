@@ -20,5 +20,8 @@
     "browser": false,
     "element": false,
     "by": false
-  }
+  },
+
+  "esversion": 6,
+  "devel": true
 }
