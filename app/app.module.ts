@@ -1,27 +1,23 @@
-import './app.css';
+import { BrowserModule } from '@angular/platform-browser';
+import {Inject, NgModule} from '@angular/core';
+import {UpgradeModule} from "@angular/upgrade/static";
 
-import angular from 'angular';
-import ngAnimate from 'angular-animate';
-import ngRoute from 'angular-route';
+import * as angularJSModule from './app.module.ajs';
 
-import core from './core/core.module';
-import phoneDetail from './phone-detail/phone-detail.module';
-import phoneList from './phone-list/phone-list.module';
+@NgModule({
+    declarations: [
 
-import config from './app.config';
-import animation, * as animationFactory from './app.animations';
-import Phone, * as PhoneService from "./core/phone/phone.service";
-import checkmark, * as checkmarkFilter from './core/checkmark/checkmark.filter';
-
-angular.
-  module('phonecatApp', [
-    ngAnimate,
-    ngRoute,
-    core,
-    phoneDetail,
-    phoneList
-  ]).
-  config(config).
-  animation(animationFactory.className, animation).
-  factory(PhoneService.name, Phone).
-  filter(checkmarkFilter.name, checkmark);
+    ],
+    imports: [
+        BrowserModule,
+        UpgradeModule
+    ],
+    providers: [],
+    bootstrap: []
+})
+export class AppModule {
+    constructor(@Inject(UpgradeModule) private upgrade: UpgradeModule) { }
+    ngDoBootstrap() {
+        this.upgrade.bootstrap(document.documentElement, [angularJSModule.name]);
+    }
+}

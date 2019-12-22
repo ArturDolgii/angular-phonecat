@@ -6,7 +6,8 @@ const CopyPlugin = require('copy-webpack-plugin');
 module.exports = {
     mode: 'development',
     entry: {
-        index: './app/app.module.ts',
+        angularjs: './app/app.module.ajs.ts',
+        angular: './app/main.ts',
     },
     devtool:  'source-map',
     output: {
