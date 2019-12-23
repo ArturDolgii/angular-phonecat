@@ -17,6 +17,8 @@ import { BrowserModule } from '@angular/platform-browser';
 import {Inject, NgModule} from '@angular/core';
 import {downgradeInjectable, UpgradeModule} from "@angular/upgrade/static";
 import {HttpClientModule} from "@angular/common/http";
+import {PhoneListComponent} from './phone-list/phone-list.component';
+import {FormsModule} from "@angular/forms";
 
 const angularJSModuleName: string = 'phonecatApp';
 
@@ -35,12 +37,16 @@ angular.
 
 @NgModule({
     declarations: [
-
+        PhoneListComponent
+    ],
+    entryComponents: [
+        PhoneListComponent
     ],
     imports: [
         BrowserModule,
         UpgradeModule,
-        HttpClientModule
+        HttpClientModule,
+        FormsModule
     ],
     providers: [
         Phone
