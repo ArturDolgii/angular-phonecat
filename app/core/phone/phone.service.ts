@@ -1,18 +1,21 @@
-import IPhone from "../../interfaces/IPhone";
+import {Inject, Injectable} from "@angular/core";
+import {HttpClient} from "@angular/common/http";
+import {Observable} from "rxjs";
 
-class Phone {
-  static $inject = ['$resource'];
-  constructor(private $resource: ng.resource.IResourceService) {
-    return <ng.resource.IResourceClass<ng.resource.IResource<IPhone[]>>>this.$resource('phones/:phoneId.json', {}, {
-      query: {
-        method: 'GET',
-        params: { phoneId: 'phones' },
-        isArray: true
-      }
-    }) as any;
+import IPhone from "../../interfaces/IPhone";
+import IPhoneDetail from "../../interfaces/IPhoneDetail";
+
+@Injectable()
+export class Phone {
+  constructor(@Inject(HttpClient) private http: HttpClient) { }
+
+  query(): Observable<IPhone[]> {
+    return this.http.get<IPhone[]>(`phones/phones.json`);
+  }
+
+  get(id: string): Observable<IPhoneDetail> {
+    return this.http.get<IPhoneDetail>(`phones/${id}.json`);
   }
 }
 
-export const name: string = 'Phone';
-
-export default Phone;
+export const PhoneServiceName: string = 'Phone';

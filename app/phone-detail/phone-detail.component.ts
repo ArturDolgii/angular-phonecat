@@ -1,21 +1,23 @@
 import template from './phone-detail.template.html';
-import * as PhoneService from '../core/phone/phone.service';
+
+import {Phone, PhoneServiceName} from '../core/phone/phone.service';
 import IPhoneDetail from "../interfaces/IPhoneDetail";
 
 class PhoneDetailController {
-  public phone: ng.resource.IResource<IPhoneDetail>;
+  public phone: IPhoneDetail;
   public mainImageUrl: string;
 
-  $inject = ['$routeParams', PhoneService.name];
-  constructor(private $routeParams, private Phone) {}
+  $inject = ['$routeParams', PhoneServiceName];
+  constructor(private $routeParams, private Phone: Phone) {}
 
   $onInit() {
-    this.phone = this.getPhone();
+    this.getPhone();
   }
 
-  getPhone(): ng.resource.IResource<IPhoneDetail> {
-    return this.Phone.get({phoneId: this.$routeParams.phoneId}, (phone: IPhoneDetail) => {
-      this.setImage(phone.images[0]);
+  getPhone(): void {
+    this.Phone.get(this.$routeParams.phoneId).subscribe((data: IPhoneDetail) => {
+      this.phone = data;
+      this.setImage(data.images[0]);
     });
   }
 

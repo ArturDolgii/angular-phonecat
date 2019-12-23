@@ -1,18 +1,20 @@
 import './styles.css';
 
 import template from './phone-list.template.html';
-import * as PhoneService from "../core/phone/phone.service";
+import {Phone, PhoneServiceName} from "../core/phone/phone.service";
 import IPhone from '../interfaces/IPhone';
 
 class PhoneListController {
-  public phones: ng.resource.IResourceArray<IPhone[]>;
+  public phones: IPhone[];
   public orderProp: string;
 
-  static $inject = [PhoneService.name];
-  constructor(private Phone: ng.resource.IResourceClass<IPhone[]>) {}
+  static $inject = [PhoneServiceName];
+  constructor(private Phone: Phone) {}
 
   $onInit() {
-    this.phones = this.Phone.query();
+    this.Phone.query().subscribe(phones => {
+      this.phones = phones;
+    });
     this.orderProp = 'age';
   }
 }
