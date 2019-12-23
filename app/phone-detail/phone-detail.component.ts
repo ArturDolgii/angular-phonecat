@@ -1,34 +1,35 @@
 import template from './phone-detail.template.html';
 
-import {Phone, PhoneServiceName} from '../core/phone/phone.service';
+import {Phone} from '../core/phone/phone.service';
 import IPhoneDetail from "../interfaces/IPhoneDetail";
+import {Component, Inject} from "@angular/core";
+import {RouteParams} from "../ajs-upgraded-providers";
 
-class PhoneDetailController {
+@Component({
+  selector: 'phone-list',
+  template
+})
+export class PhoneDetailComponent {
   public phone: IPhoneDetail;
   public mainImageUrl: string;
 
-  $inject = ['$routeParams', PhoneServiceName];
-  constructor(private $routeParams, private Phone: Phone) {}
+  constructor(@Inject(RouteParams) private routeParams: RouteParams,
+              @Inject(Phone) private Phone: Phone) {}
 
-  $onInit() {
+  public ngOnInit(): void {
     this.getPhone();
   }
 
-  getPhone(): void {
-    this.Phone.get(this.$routeParams.phoneId).subscribe((data: IPhoneDetail) => {
+  public getPhone(): void {
+    this.Phone.get(this.routeParams['phoneId']).subscribe((data: IPhoneDetail) => {
       this.phone = data;
       this.setImage(data.images[0]);
     });
   }
 
-  setImage(imageUrl: string): void {
+  public setImage(imageUrl: string): void {
     this.mainImageUrl = imageUrl;
   }
 }
 
 export const name: string = 'phoneDetail';
-
-export default {
-  template,
-  controller: PhoneDetailController
-};

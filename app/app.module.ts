@@ -11,14 +11,16 @@ import phoneList from './phone-list/phone-list.module';
 import config from './app.config';
 import animation, * as animationFactory from './app.animations';
 import { Phone, PhoneServiceName } from "./core/phone/phone.service";
-import checkmark, * as checkmarkFilter from './core/checkmark/checkmark.filter';
 
 import { BrowserModule } from '@angular/platform-browser';
 import {Inject, NgModule} from '@angular/core';
 import {downgradeInjectable, UpgradeModule} from "@angular/upgrade/static";
 import {HttpClientModule} from "@angular/common/http";
+import {PhoneDetailComponent} from './phone-detail/phone-detail.component';
 import {PhoneListComponent} from './phone-list/phone-list.component';
 import {FormsModule} from "@angular/forms";
+import {routeParamsProvider} from "./ajs-upgraded-providers";
+import {CheckmarkPipe} from "./core/checkmark/checkmark.pipe";
 
 const angularJSModuleName: string = 'phonecatApp';
 
@@ -32,15 +34,17 @@ angular.
     ]).
     config(config).
     animation(animationFactory.className, animation).
-    factory(PhoneServiceName, downgradeInjectable(Phone)).
-    filter(checkmarkFilter.name, checkmark);
+    factory(PhoneServiceName, downgradeInjectable(Phone));
 
 @NgModule({
     declarations: [
-        PhoneListComponent
+        PhoneListComponent,
+        PhoneDetailComponent,
+        CheckmarkPipe
     ],
     entryComponents: [
-        PhoneListComponent
+        PhoneListComponent,
+        PhoneDetailComponent
     ],
     imports: [
         BrowserModule,
@@ -49,7 +53,8 @@ angular.
         FormsModule
     ],
     providers: [
-        Phone
+        Phone,
+        routeParamsProvider
     ],
     bootstrap: []
 })
